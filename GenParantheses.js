@@ -15,3 +15,5 @@ var generate = function (res, str, ll, rr) {
         res.push(str);
     }
 };
+
+console.log(generateParenthesis(3))
