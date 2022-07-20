@@ -28,3 +28,7 @@ var dfs = function (res, arr, nums) {
         dfs(res, tmp1, tmp2);
     }
 };
+
+const arr = [1,2,3]
+const result = permute(arr)
+console.log('result: ', result);
