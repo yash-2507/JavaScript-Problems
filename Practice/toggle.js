@@ -1,9 +1,9 @@
 const toggler = (arr) => {
-   let current = -1;
+   let temp = -1;
    const n = arr.length;
    return function () {
-      current = (current + 1) % n;
-      console.log(arr[current]);
+      temp = (temp + 1) % n;
+      console.log(arr[temp]);
    };
 };
 
