@@ -45,3 +45,5 @@ function mergeSort(arr) {
    // merging the two sorted halves
    return merge(left, right);
 }
+
+console.log(mergeSort([2, 4, 1, 0, 5, -1]))
