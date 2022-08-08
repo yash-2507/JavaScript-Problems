@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>JavaScript | With Throttling</title>
+   </head>
+   <body>
+      <button id="throttle">Click Me</button>
+      <div id="parent"></div>
+      <script>
+         const btn = document.querySelector('#throttle');
+         const parent = document.getElementById('parent');
+         let clicked = 0;
+         // Throttling Function
+         const throttleFunction = (func, delay) => {
+            let prev = 0;
+            return (...args) => {
+               clicked++;
+               const child = document.createElement('div');
+               child.innerText = `Clicked ${clicked} Times`;
+               parent.appendChild(child);
+               let now = new Date().getTime();
+               console.log('Clicked', clicked);
+               if (now - prev > delay) {
+                  const success = document.createElement('h3');
+                  success.innerText = "I'm Done";
+                  parent.appendChild(success);
+                  prev = now;
+                  return func(...args);
+               }
+            };
+         };
+         btn.addEventListener(
+            'click',
+            throttleFunction(() => {
+               console.log("I'm done");
+            }, 500),
+         );
+      </script>
+   </body>
+</html>

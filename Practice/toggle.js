@@ -1,13 +1,16 @@
-const toggler = (arr) => {
+const toggler = (...args) => {
+   if(typeof args[0] === "object") {
+      args = args[0]
+   }
    let temp = -1;
-   const n = arr.length;
+   const n = args.length;
    return function () {
       temp = (temp + 1) % n;
-      console.log(arr[temp]);
+      console.log(args[temp]);
    };
 };
 
-const toggle = toggler([1, 2, 3]);
+const toggle = toggler(1, 2, 3);
 toggle();
 toggle();
 toggle();
