@@ -46,7 +46,7 @@ function printNGE(arr, n) {
     var s = [];
     let res = new Array(n);
     for (let i = n - 1; i >= 0; i--) {
-        if (s.length != 0) {
+        if (s.length !== 0) {
             while (s.length != 0 && s[s.length - 1] <= arr[i]) {
                 s.pop();
             }
