@@ -22,7 +22,8 @@ function partition(arr, start = 0, end = arr.length - 1) {
 }
 
 function quickSort(arr, left = 0, right = arr.length - 1) {
-   // Base case is that the left and right pointers don't overlap, after which we'll be left with an array of 1 item
+   // Base case is that the left and right pointers don't overlap, after which we'll be left with an array 
+   // of 1 item
    if (left < right) {
       let pivotIndex = partition(arr, left, right);
 
@@ -35,3 +36,5 @@ function quickSort(arr, left = 0, right = arr.length - 1) {
    // Return the array, when it's of length 1 i.e, left === right
    return arr;
 }
+
+console.log(quickSort([2, 4, 1, 0, 5, -1]));
