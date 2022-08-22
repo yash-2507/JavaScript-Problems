@@ -1,30 +1,34 @@
 //Given a string s, find the longest palindromic substring in s.
 
-var longestPalindrome = function (s) {
-    var start = 0;
-    var end = 0;
-    var len = s.length;
-    var num = 0;
-    for (var i = 0; i < len; i++) {
-        num = Math.max(
-            expandAroundCenter(s, i, i),
-            expandAroundCenter(s, i, i + 1)
-        );
-        if (num > end - start) {
-            start = i - Math.floor((num - 1) / 2);
-            end = i + Math.floor(num / 2);
+var longestPalindrome = function (str) {
+    let n = str.length;
+    if (n < 2) return n;
+
+    let maxLength = 1,
+        start = 0;
+    let low, high;
+    for (let i = 0; i < n; i++) {
+        low = i - 1;
+        high = i + 1;
+        while (high < n && str[high] == str[i])
+            high++;
+
+        while (low >= 0 && str[low] == str[i])
+            low--;
+
+        while (low >= 0 && high < n && str[low] == str[high]) {
+            low--;
+            high++;
+        }
+
+        let length = high - low - 1;
+        if (maxLength < length) {
+            maxLength = length;
+            start = low + 1;
         }
     }
-    return s.slice(start, end + 1);
+    console.log(str.substring(start, maxLength + start));
+    return maxLength;
 };
 
-var expandAroundCenter = function (s, left, right) {
-    var l = left;
-    var r = right;
-    var len = s.length;
-    while (l >= 0 && r < len && s[l] === s[r]) {
-        l--;
-        r++;
-    }
-    return r - l - 1;
-};
+console.log(longestPalindrome('abcbacd'));
