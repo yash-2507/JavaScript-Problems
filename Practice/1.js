@@ -1,27 +1,31 @@
-const longestPath = (arr, n, m) => {
-    let result = 0,
-        visited = Array.from({ length: n }, (_) => new Uint16Array(m));
-    const DFS = (y, x) => {
-        if (visited[y][x]) return visited[y][x];
-        let val = arr[y][x];
-        visited[y][x] =
-            1 +
-            Math.max(
-                y < n - 1 && arr[y + 1][x] < val ? DFS(y + 1, x) : 0,
-                y > 0 && arr[y - 1][x] < val ? DFS(y - 1, x) : 0,
-                x < m - 1 && arr[y][x + 1] < val ? DFS(y, x + 1) : 0,
-                x > 0 && arr[y][x - 1] < val ? DFS(y, x - 1) : 0,
-            );
-        return visited[y][x];
-    };
-    for (let i = 0; i < n; i++) for (let j = 0; j < m; j++) result = Math.max(result, DFS(i, j));
-    return result;
-};
+let RESULT = 0;
+const checkMaze = (arr, n, m, k, x, y) => {
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < m; j++) {
+            if (i === x - 1 && j === y - 1 && arr[i][j] === '.') {
+                if (RESULT !== k) {
+                    DFS(arr, n, m, i, j, k);
+                }
+            }
+        }
+    }
+    if (RESULT === k) {
+        console.log('YES');
+    } else {
+        console.log('NO');
+    }
+}
 
-console.log(
-    longestPath([
-        [9, 9, 4],
-        [6, 6, 8],
-        [2, 1, 1],
-    ], 3, 3),
-);
+const DFS = (arr, n, m, x, y, k) => {
+    if (x === n || y === m || x < 0 || y < 0 || arr[x][y] === '*' || k === RESULT) {
+        return;
+    }
+
+    RESULT++;
+    arr[x][y] = '*';
+
+    DFS(arr, n, m, x + 1, y, k);
+    DFS(arr, n, m, x - 1, y, k);
+    DFS(arr, n, m, x, y + 1, k);
+    DFS(arr, n, m, x, y - 1, k);
+}
